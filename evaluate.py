@@ -21,7 +21,7 @@ except Exception as e:
     print(f"Error loading dataset: {e}")
     exit(1)
 
-# Define ResNet50 Model (same architecture as training)
+# Define ResNet50 Model
 class DeepfakeDetector(nn.Module):
     def __init__(self):
         super(DeepfakeDetector, self).__init__()

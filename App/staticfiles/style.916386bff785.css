@@ -1,0 +1,52 @@
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+.main {
+  margin-top: 80px;
+}
+
+.upload-box {
+  border: 2px dashed #38bdf8;
+  padding: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #22c55e;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+select {
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.result-card {
+  margin-top: 30px;
+}
+
+.video-preview {
+  margin-top: 30px;
+  padding: 20px;
+  background: #1e293b;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}

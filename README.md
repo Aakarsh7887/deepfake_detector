@@ -33,3 +33,11 @@ Deepfake_detection_using_deep_learning
 | model_90_acc_60_frames_final_data.pt  | 6000         | 60           | 90.59097 |
 | model_91_acc_80_frames_final_data.pt  | 6000         | 80           | 91.49818 |
 | model_93_acc_100_frames_final_data.pt | 6000         | 100          | 93.58794 |
+
+
+## trained models location
+   Download from:
+   [GOOGLE DRIVE LINK](https://drive.google.com/drive/folders/1sgUBBDYLYOwwD_TlEXpbnsbpYFJjixU0?usp=sharing)
+
+   Place inside:
+   App/model/weights/

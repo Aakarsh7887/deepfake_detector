@@ -5,6 +5,10 @@ from model.predict import predict_video
 def home(request):
     if request.method == 'POST':
         video = request.FILES.get('video')
+        if video.size > 20 * 1024 * 1024:
+            return render(request, 'index.html', {
+                'error': 'Max file size is 20MB'
+            })
         frame_count = int(request.POST.get('frames'))
 
         fs = FileSystemStorage()

@@ -14,31 +14,26 @@ print("Using device:", DEVICE)
 #  Load models ONCE (not every request)
 loaded_models = {}
 
-def load_all_models():
+def load_models(frame_count):
     global loaded_models
 
-    if loaded_models:  # already loaded
+    if frame_count in loaded_models:
         return
+
+    loaded_models[frame_count] = []
 
     weights_dir = os.path.join(os.path.dirname(__file__), "weights")
 
-    for frame_count, model_files in MODEL_REGISTRY.items():
-        loaded_models[frame_count] = []
+    for file in MODEL_REGISTRY[frame_count]:
+        path = os.path.join(weights_dir, file)
 
-        for file in model_files:
-            path = os.path.join(weights_dir, file)
+        model = MyModel()
+        model.load_state_dict(torch.load(path, map_location=DEVICE, weights_only=True))
+        model.to(DEVICE)
+        model.eval()
 
-            model = MyModel()
-            model.load_state_dict(torch.load(path, map_location=DEVICE, weights_only=True))
-            model.to(DEVICE)
-            model.eval()
+        loaded_models[frame_count].append((file, model))
 
-            loaded_models[frame_count].append((file, model))
-
-    print(" All models loaded into GPU")
-
-# Load once at startup
-load_all_models()
 
 
 #  Preprocessing
@@ -85,7 +80,7 @@ def preprocess(video_path, frame_count):
 
 #  Prediction 
 def predict_video(video_path, frame_count):
-
+    load_models(frame_count)
     frames = preprocess(video_path, frame_count)
 
     model_outputs = {}

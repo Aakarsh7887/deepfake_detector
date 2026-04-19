@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+
+# Django
+db.sqlite3
+media/
+
+# Models (IMPORTANT)
+App/model/weights/
+
+# System
+.DS_Store

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Deepfake Detector AI</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <h1>🧠 Deepfake Detector</h1>
+      <p>Multi-model GPU Ensemble</p>
+
+      <form method="POST" enctype="multipart/form-data" id="uploadForm">
+        {% csrf_token %}
+
+        <div class="upload-box" id="dropArea">
+          <p>Click or Drag Video</p>
+          <input type="file" name="video" id="fileInput" required />
+        </div>
+
+        <select name="frames">
+          <option value="10">10 Frames</option>
+          <option value="20">20 Frames</option>
+          <option value="40">40 Frames</option>
+          <option value="60">60 Frames</option>
+          <option value="80">80 Frames</option>
+          <option value="100">100 Frames</option>
+        </select>
+
+        <button type="submit">Analyze</button>
+      </form>
+
+      <div id="videoPreview" class="video-preview hidden">
+        <h3>Selected Video</h3>
+        <video id="previewVideo" controls width="400"></video>
+      </div>
+
+      <div id="loader" class="hidden">Processing...</div>
+
+      {% if results %}
+      <div class="result-card">
+        <h2>Model Outputs</h2>
+
+        {% for model, res in results.items %}
+        <p>{{ model }} → {{ res.label }} ({{ res.confidence }}%)</p>
+        {% endfor %}
+
+        <h2>Final: {{ final }}</h2>
+        <h3>Confidence: {{ confidence }}%</h3>
+
+        <video controls width="400">
+          <source src="{{ video_url }}" />
+        </video>
+      </div>
+      {% endif %}
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
